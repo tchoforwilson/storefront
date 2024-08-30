@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from store.models import Order, OrderItem, Product, Customer
+from store.models import Order, OrderItem, Product, Customer, Collection
 
 def say_hello(request):
-    queryset = Product.objects.all()
-    queryset[0]
-    list(queryset)
-    return render(request, 'hello.html', {'name':'John Doe', 'tags':list(queryset)})
+    collection = Collection()
+    collection.title = "Video Games"
+    collection.featured_product = Product(pk=1)
+    collection.save()
+    
+    return render(request, 'hello.html', {'name':'John Doe'})
