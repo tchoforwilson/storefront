@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.contrib.contenttypes.models import ContentType
-from store.models import Product
-from tags.models import TaggedItem
+from store.models import Order, OrderItem, Product, Customer
 
 def say_hello(request):
-    queryset = TaggedItem.objects.ge_tags_for(Product, 1)
+    queryset = Product.objects.all()
+    queryset[0]
+    list(queryset)
     return render(request, 'hello.html', {'name':'John Doe', 'tags':list(queryset)})
