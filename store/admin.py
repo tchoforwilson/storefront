@@ -29,6 +29,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['unit_price']
     list_filter = ['collection', 'last_update', InventoryFilter]
     list_per_page = 10
+    search_fields =['title']
     
     @admin.display(ordering='inventory')
     def inventory_status(self, product):
@@ -43,7 +44,14 @@ class ProductAdmin(admin.ModelAdmin):
             request,
             f'{updated_count} products were successfully updated',
             messages.SUCCESS)
-        
+@admin.register(models.Collection)
+class CollectionAdmin(admin.ModelAdmin):
+    list_display = ['title', 'products_count']
+    search_fields = ['title']
+    @admin.display(ordering='products_count')
+    def products_count(self, collection):
+        url = ()
+    
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name','membership']
@@ -52,4 +60,4 @@ class CustomerAdmin(admin.ModelAdmin):
     ordering = ['first_name', 'last_name']
     search_fields = [ 'first_name__istartswith', 'last_name__istartswith']
     
-admin.site.register(models.Collection)
+# admin.site.register(models.Collection)
